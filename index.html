@@ -18,9 +18,9 @@
             --neon: #00f5ff;
             --pink: #ff007a;
             --gold: #ffd700;
-            --bg: #050508;
-            --bg2: #09090f;
-            --card: #0f0f1e;
+            --bg: #0a0a0a;
+            --bg2: #050508;
+            --card: #121212;
             --text: #d0d0e8;
             --muted: #707090;
             --border: rgba(0, 245, 255, 0.2);
@@ -238,7 +238,7 @@
 
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 10;
             max-width: 900px;
             padding: 0 20px;
         }
@@ -475,8 +475,21 @@
             font-family: 'Bebas Neue', sans-serif;
             font-size: 1.2rem;
             letter-spacing: 1px;
-            cursor: default;
+            cursor: pointer;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pill i {
+            font-size: 1rem;
+            color: var(--neon);
+            transition: var(--transition);
+        }
+
+        .pill:hover i {
+            color: var(--bg);
         }
 
         .pill:hover {
@@ -551,12 +564,40 @@
             gap: 25px;
         }
 
+        /* Why Choose Us Hover Effects */
         .why-card {
-            background: var(--bg2);
-            padding: 40px 20px;
+            background: var(--card);
+            padding: 40px 30px;
+            border-radius: 20px;
             text-align: center;
-            border-top: 4px solid var(--neon);
-            transition: var(--transition);
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, var(--neon) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .why-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: var(--neon);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
+        }
+
+        .why-card:hover::before {
+            opacity: 0.05;
         }
 
         .why-card i {
@@ -564,83 +605,148 @@
             color: var(--neon);
             margin-bottom: 20px;
             text-shadow: var(--glow);
+            transition: transform 0.4s ease, color 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .why-card:hover i {
+            transform: scale(1.2) rotate(5deg);
+            color: var(--pink);
+            text-shadow: var(--glow-pink);
         }
 
         .why-card h4 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
         }
 
-        .why-card:hover {
-            transform: translateY(-10px);
-            background: var(--card);
-            box-shadow: var(--glow);
+        .why-card p {
+            color: var(--muted);
+            position: relative;
+            z-index: 1;
         }
 
         /* Gallery */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            gap: 24px;
             margin-bottom: 40px;
         }
 
         .gallery-item {
             position: relative;
-            height: 320px;
-            background: linear-gradient(135deg, #0a0a1a, #1a0a2e);
-            border: 1px solid var(--neon);
+            height: 480px;
+            background: #0a0a0a;
+            border-radius: 16px;
             overflow: hidden;
-            border-radius: 8px;
             cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 245, 255, 0.05);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(0.7) contrast(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 30%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.95) 100%);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            justify-content: flex-end;
+            padding: 32px;
             transition: var(--transition);
-            padding: 20px;
+            z-index: 2;
         }
 
-        .gallery-icon {
-            font-size: 4.5rem;
-            color: var(--neon);
-            text-shadow: var(--glow);
-            margin-bottom: 20px;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .gallery-label {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.2rem;
-            color: white;
-            letter-spacing: 2px;
-            text-align: center;
+        /* Vignette Effect */
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.4) 100%);
+            pointer-events: none;
+            z-index: 1;
         }
 
         .gallery-badge {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 20px;
+            right: 20px;
             background: var(--pink);
             color: white;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             font-weight: bold;
-            padding: 4px 10px;
-            border-radius: 4px;
-            box-shadow: var(--glow-pink);
+            padding: 6px 14px;
+            border-radius: 30px;
+            box-shadow: 0 0 15px rgba(255, 0, 122, 0.6), 0 0 30px rgba(0, 245, 255, 0.3);
             text-transform: uppercase;
             letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        .gallery-content {
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .gallery-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.4rem;
+            color: white;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            display: block;
+            line-height: 1;
+        }
+
+        .gallery-cta {
+            font-size: 0.9rem;
+            color: var(--neon);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .gallery-item:hover {
-            transform: scale(1.04);
+            transform: scale(1.05);
             border-color: var(--neon);
-            box-shadow: 0 0 30px rgba(0, 245, 255, 0.6);
-            z-index: 2;
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.2);
+            z-index: 10;
         }
 
-        .gallery-item:hover .gallery-icon {
-            transform: rotate(360deg);
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.15);
+            filter: brightness(0.9) contrast(1.2);
+        }
+
+        .gallery-item:hover .gallery-content {
+            transform: translateY(0);
+        }
+
+        .gallery-item:hover .gallery-cta {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .gallery-note {
@@ -648,7 +754,35 @@
             color: var(--muted);
             font-size: 1.1rem;
             font-style: italic;
-            margin-top: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            backdrop-filter: blur(5px);
+            transition: opacity 0.5s ease;
+        }
+
+        .loader-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(0, 245, 255, 0.1);
+            border-top-color: var(--neon);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         /* Testimonials */
@@ -947,7 +1081,6 @@
         @media (max-width: 1199px) {
             .about-grid, .contact-grid { gap: 40px; }
             .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 767px) {
@@ -978,8 +1111,21 @@
             .btn-hero { width: 100%; }
 
             .stats-row { grid-template-columns: repeat(2, 1fr); }
-            .about-grid, .contact-grid, .services-grid, .how-grid, .why-grid, .gallery-grid, .testimonial-grid { 
+            .about-grid, .contact-grid, .services-grid, .how-grid, .why-grid, .testimonial-grid { 
                 grid-template-columns: 1fr; 
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .gallery-item {
+                height: 300px;
+            }
+
+            .gallery-label {
+                font-size: 1.4rem;
             }
 
             .how-grid::before { display: none; }
@@ -991,7 +1137,188 @@
             section { padding: 60px 0; }
         }
 
-        /* Animations */
+        /* Category Gallery Modal */
+        .category-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            z-index: 20000;
+            display: none;
+            overflow-y: auto;
+            padding: 40px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .category-modal.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--neon);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        .modal-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--text);
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .modal-title span {
+            color: var(--neon);
+            text-shadow: var(--glow);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .category-img-wrapper img {
+            transition: transform 0.5s ease;
+        }
+
+        .category-img-wrapper:hover img {
+            transform: scale(1.1);
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg2) 25%, var(--border) 50%, var(--bg2) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .category-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .category-img-wrapper:hover img {
+            transform: scale(1.1);
+        }
+
+        .category-img-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 245, 255, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-img-wrapper:hover::after {
+            opacity: 1;
+        }
+
+        .modal-footer {
+            margin-top: 60px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-book-modal {
+            background: #25D366;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 4px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 30000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+        }
+
+        /* Skeleton Loader */
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg2) 25%, #1a1a2e 50%, var(--bg2) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        @media (max-width: 991px) {
+            .category-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 767px) {
+            .category-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .modal-header { flex-direction: column; gap: 20px; }
+        }
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -1007,6 +1334,113 @@
         #hero-canvas {
             pointer-events: none;
         }
+        /* Parallax Backgrounds */
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.15;
+            pointer-events: none;
+            transition: transform 0.1s linear;
+        }
+
+        #about, #gallery {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Music Visualizer */
+        #visualizer-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .audio-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+        }
+
+        .play-pause-btn {
+            background: var(--neon);
+            color: var(--bg);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .play-pause-btn:hover {
+            transform: scale(1.1);
+            box-shadow: var(--glow);
+        }
+
+        .audio-info {
+            font-size: 0.8rem;
+            color: var(--text);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .filter-tab {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-tab.active {
+            background: var(--neon);
+            color: var(--bg);
+            border-color: var(--neon);
+            box-shadow: var(--glow);
+        }
+
+        .filter-tab:hover:not(.active) {
+            border-color: var(--neon);
+            color: var(--neon);
+        }
+
     </style>
 </head>
 <body>
@@ -1037,6 +1471,7 @@
     <!-- Hero -->
     <section id="home">
         <canvas id="hero-canvas"></canvas>
+        <canvas id="visualizer-canvas"></canvas>
         <div class="hero-content">
             <h1 class="hero-title reveal">KEYUR DHODI</h1>
             <h2 class="hero-subtitle reveal">PRO SOUND</h2>
@@ -1045,6 +1480,18 @@
                 <a href="#contact" class="btn-hero btn-filled">BOOK NOW</a>
                 <a href="#services" class="btn-hero btn-outline">OUR SERVICES</a>
             </div>
+        </div>
+
+        <div class="audio-controls">
+            <div class="play-pause-btn" id="play-pause">
+                <i class="fa-solid fa-play"></i>
+            </div>
+            <div class="audio-info">
+                <span>NOW PLAYING: PRO SOUND MIX</span>
+            </div>
+            <audio id="bg-audio" loop>
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            </audio>
         </div>
 
         <div class="equalizer">
@@ -1062,6 +1509,7 @@
 
     <!-- About -->
     <section id="about">
+        <div class="parallax-bg" id="about-parallax" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=1920');"></div>
         <div class="container">
             <div class="stats-row reveal">
                 <div class="stat-card">
@@ -1145,17 +1593,54 @@
         <div class="container">
             <h2 class="section-title reveal">EVENTS WE <span>COVER</span></h2>
             <div class="events-pills reveal">
-                <div class="pill">Shaadi</div>
-                <div class="pill">Birthday</div>
-                <div class="pill">Sangeet</div>
-                <div class="pill">Reception</div>
-                <div class="pill">Corporate</div>
-                <div class="pill">Garba Night</div>
-                <div class="pill">Pool Party</div>
-                <div class="pill">College Fest</div>
+                <div class="pill" data-category="Shaadi"><i class="fa-solid fa-heart"></i> Shaadi</div>
+                <div class="pill" data-category="Birthday"><i class="fa-solid fa-cake-candles"></i> Birthday</div>
+                <div class="pill" data-category="Sangeet"><i class="fa-solid fa-music"></i> Sangeet</div>
+                <div class="pill" data-category="Reception"><i class="fa-solid fa-champagne-glasses"></i> Reception</div>
+                <div class="pill" data-category="Corporate"><i class="fa-solid fa-briefcase"></i> Corporate</div>
+                <div class="pill" data-category="Garba Night"><i class="fa-solid fa-drum"></i> Garba Night</div>
+                <div class="pill" data-category="Pool Party"><i class="fa-solid fa-person-swimming"></i> Pool Party</div>
+                <div class="pill" data-category="College Fest"><i class="fa-solid fa-graduation-cap"></i> College Fest</div>
             </div>
         </div>
     </section>
+
+    <!-- Category Gallery Modal -->
+    <div class="category-modal" id="categoryModal">
+        <div class="container">
+            <div class="modal-header">
+                <div class="back-btn" id="closeModal">
+                    <i class="fa-solid fa-arrow-left"></i> BACK TO EVENTS
+                </div>
+                <h2 class="modal-title" id="modalTitle"><span>SHAADI</span> EVENTS</h2>
+                <div style="width: 100px;"></div> <!-- Spacer for balance -->
+            </div>
+
+            <div class="filter-tabs">
+                <div class="filter-tab active" data-filter="all">ALL</div>
+                <div class="filter-tab" data-filter="indoor">INDOOR</div>
+                <div class="filter-tab" data-filter="outdoor">OUTDOOR</div>
+                <div class="filter-tab" data-filter="night">NIGHT</div>
+            </div>
+            
+            <div class="category-grid" id="categoryGrid">
+                <!-- Skeleton loaders will be injected here -->
+            </div>
+
+            <div class="modal-footer">
+                <p class="gallery-note">Loved these vibes? Let's make your event legendary.</p>
+                <a href="https://wa.me/919909473484?text=Hi%20Keyur,%20I%20saw%20your%20portfolio%20and%20want%20to%20book%20you%20for%20an%20event!" class="btn-book-modal" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> BOOK THIS VIBE NOW
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-close" id="closeLightbox">&times;</div>
+        <img src="" alt="Full View" id="lightboxImg">
+    </div>
 
     <!-- How It Works -->
     <section id="how-it-works" style="background: var(--bg2);">
@@ -1213,42 +1698,97 @@
     </section>
 
     <!-- Gallery -->
-    <section id="gallery" style="background: var(--bg2);">
+    <section id="gallery" style="background: #050508;">
+        <div class="parallax-bg" id="gallery-parallax" style="background-image: url('https://images.unsplash.com/photo-1514525253361-bee8718a300a?auto=format&fit=crop&q=80&w=1920');"></div>
         <div class="container">
             <h2 class="section-title reveal">OUR <span>WORK</span></h2>
             <div class="gallery-grid">
-                <div class="gallery-item reveal">
-                    <div class="gallery-badge">2024</div>
-                    <i class="fa-solid fa-heart gallery-icon"></i>
-                    <span class="gallery-label">WEDDING NIGHT</span>
+                <!-- Wedding -->
+                <div class="gallery-item reveal" data-prompt="luxury wedding DJ setup, elegant floral decor, warm ambient lighting, cinematic, 4k">
+                    <div class="gallery-badge">2026</div>
+                    <div class="gallery-loader">
+                        <div class="loader-spinner"></div>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80&w=800" alt="Grand Wedding" class="gallery-img" loading="lazy" referrerPolicy="no-referrer" onload="this.previousElementSibling.style.opacity='0'; setTimeout(() => this.previousElementSibling.style.display='none', 500)">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <span class="gallery-label">GRAND WEDDING</span>
+                            <span class="gallery-cta">VIEW EVENT</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="gallery-item reveal">
-                    <div class="gallery-badge">2024</div>
-                    <i class="fa-solid fa-cake-candles gallery-icon"></i>
-                    <span class="gallery-label">BIRTHDAY BASH</span>
+                <!-- Birthday -->
+                <div class="gallery-item reveal" data-prompt="vibrant birthday party DJ, neon lights, balloons, happy crowd, cinematic, 4k">
+                    <div class="gallery-badge">2026</div>
+                    <div class="gallery-loader">
+                        <div class="loader-spinner"></div>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=80&w=800" alt="Birthday Bash" class="gallery-img" loading="lazy" referrerPolicy="no-referrer" onload="this.previousElementSibling.style.opacity='0'; setTimeout(() => this.previousElementSibling.style.display='none', 500)">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <span class="gallery-label">BIRTHDAY BASH</span>
+                            <span class="gallery-cta">WATCH REEL</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="gallery-item reveal">
-                    <div class="gallery-badge">2024</div>
-                    <i class="fa-solid fa-music gallery-icon"></i>
-                    <span class="gallery-label">SANGEET NIGHT</span>
+                <!-- Sangeet Night -->
+                <div class="gallery-item reveal" data-prompt="grand indian sangeet night, massive LED stage, traditional yet modern lighting, energetic dance floor, warm and neon accents, cinematic, 4k">
+                    <div class="gallery-badge">2026</div>
+                    <div class="gallery-loader">
+                        <div class="loader-spinner"></div>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&q=80&w=800" alt="Sangeet Night" class="gallery-img" loading="lazy" referrerPolicy="no-referrer" onload="this.previousElementSibling.style.opacity='0'; setTimeout(() => this.previousElementSibling.style.display='none', 500)">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <span class="gallery-label">SANGEET NIGHT</span>
+                            <span class="gallery-cta">VIEW EVENT</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="gallery-item reveal">
-                    <div class="gallery-badge">2024</div>
-                    <i class="fa-solid fa-briefcase gallery-icon"></i>
-                    <span class="gallery-label">CORPORATE EVENT</span>
+                <!-- Corporate Event -->
+                <div class="gallery-item reveal" data-prompt="sophisticated corporate gala, professional DJ setup, blue and white neon lighting, elegant ballroom, high contrast, cinematic, 4k">
+                    <div class="gallery-badge">2026</div>
+                    <div class="gallery-loader">
+                        <div class="loader-spinner"></div>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=800" alt="Corporate Event" class="gallery-img" loading="lazy" referrerPolicy="no-referrer" onload="this.previousElementSibling.style.opacity='0'; setTimeout(() => this.previousElementSibling.style.display='none', 500)">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <span class="gallery-label">CORPORATE EVENT</span>
+                            <span class="gallery-cta">WATCH REEL</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="gallery-item reveal">
-                    <div class="gallery-badge">2024</div>
-                    <i class="fa-solid fa-headphones gallery-icon"></i>
-                    <span class="gallery-label">CLUB NIGHT</span>
+                <!-- Club Night -->
+                <div class="gallery-item reveal" data-prompt="intense club atmosphere, DJ performing, strobe lights, neon purple and cyan, crowded dance floor, high energy, cinematic, 4k">
+                    <div class="gallery-badge">2026</div>
+                    <div class="gallery-loader">
+                        <div class="loader-spinner"></div>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&q=80&w=800" alt="Club Night" class="gallery-img" loading="lazy" referrerPolicy="no-referrer" onload="this.previousElementSibling.style.opacity='0'; setTimeout(() => this.previousElementSibling.style.display='none', 500)">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <span class="gallery-label">CLUB NIGHT</span>
+                            <span class="gallery-cta">VIEW EVENT</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="gallery-item reveal">
-                    <div class="gallery-badge">2024</div>
-                    <i class="fa-solid fa-compact-disc gallery-icon"></i>
-                    <span class="gallery-label">RECEPTION</span>
+                <!-- Reception -->
+                <div class="gallery-item reveal" data-prompt="elegant wedding reception party, DJ booth with floral and neon decor, romantic yet energetic lighting, cinematic, 4k">
+                    <div class="gallery-badge">2026</div>
+                    <div class="gallery-loader">
+                        <div class="loader-spinner"></div>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=800" alt="Reception" class="gallery-img" loading="lazy" referrerPolicy="no-referrer" onload="this.previousElementSibling.style.opacity='0'; setTimeout(() => this.previousElementSibling.style.display='none', 500)">
+                    <div class="gallery-overlay">
+                        <div class="gallery-content">
+                            <span class="gallery-label">RECEPTION</span>
+                            <span class="gallery-cta">WATCH REEL</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <p class="gallery-note reveal">📸 Real event photos coming soon — follow us on Instagram @keyurdhodi</p>
+            <p class="gallery-note reveal">📸 Real event photos coming soon — follow us on Instagram @_keyur03_</p>
         </div>
     </section>
 
@@ -1373,7 +1913,7 @@
                         <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
                         <div class="info-text">
                             <h5>Working Hours</h5>
-                            <p>Mon–Sun, 9AM–9PM</p>
+                            <p>24/7</p>
                         </div>
                     </div>
 
@@ -1418,7 +1958,8 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <script>
+    <script type="module">
+        import { GoogleGenAI } from "@google/genai";
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
@@ -1547,7 +2088,12 @@
         // Canvas Particles
         const canvas = document.getElementById('hero-canvas');
         const ctx = canvas.getContext('2d');
+        const visualizerCanvas = document.getElementById('visualizer-canvas');
+        const vCtx = visualizerCanvas ? visualizerCanvas.getContext('2d') : null;
         let particles = [];
+        let isAudioPlaying = false;
+        let dataArray;
+        let audioContext, analyser, source;
 
         function initCanvas() {
             canvas.width = window.innerWidth;
@@ -1565,9 +2111,10 @@
                 this.opacity = Math.random() * 0.5 + 0.2;
             }
 
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
+            update(freq = 0) {
+                const speedMultiplier = 1 + (freq / 255) * 5;
+                this.x += this.speedX * speedMultiplier;
+                this.y += this.speedY * speedMultiplier;
 
                 if (this.x > canvas.width) this.x = 0;
                 if (this.x < 0) this.x = canvas.width;
@@ -1575,11 +2122,12 @@
                 if (this.y < 0) this.y = canvas.height;
             }
 
-            draw() {
+            draw(freq = 0) {
+                const sizeMultiplier = 1 + (freq / 255) * 3;
                 ctx.globalAlpha = this.opacity;
                 ctx.fillStyle = this.color;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, this.size * sizeMultiplier, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
@@ -1594,9 +2142,15 @@
 
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            let avgFreq = 0;
+            if (isAudioPlaying && dataArray) {
+                avgFreq = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
+            }
+
             particles.forEach(p => {
-                p.update();
-                p.draw();
+                p.update(avgFreq);
+                p.draw(avgFreq);
             });
             requestAnimationFrame(animateParticles);
         }
@@ -1604,12 +2158,369 @@
         window.addEventListener('resize', () => {
             initCanvas();
             createParticles();
+            if (visualizerCanvas) {
+                visualizerCanvas.width = window.innerWidth;
+                visualizerCanvas.height = window.innerHeight;
+            }
         });
 
         initCanvas();
         createParticles();
         animateParticles();
 
+        // Parallax Scrolling Logic
+        const aboutParallax = document.getElementById('about-parallax');
+        const galleryParallax = document.getElementById('gallery-parallax');
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            
+            // About Parallax
+            if (aboutParallax) {
+                const aboutTop = document.getElementById('about').offsetTop;
+                const aboutOffset = (scrolled - aboutTop) * 0.3;
+                aboutParallax.style.transform = `translateY(${aboutOffset}px)`;
+            }
+
+            // Gallery Parallax
+            if (galleryParallax) {
+                const galleryTop = document.getElementById('gallery').offsetTop;
+                const galleryOffset = (scrolled - galleryTop) * 0.3;
+                galleryParallax.style.transform = `translateY(${galleryOffset}px)`;
+            }
+        });
+
+        // Music Visualizer Logic
+        const audio = document.getElementById('bg-audio');
+        const playPauseBtn = document.getElementById('play-pause');
+
+        function initVisualizer() {
+            if (!visualizerCanvas) return;
+            visualizerCanvas.width = window.innerWidth;
+            visualizerCanvas.height = window.innerHeight;
+
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                source = audioContext.createMediaElementSource(audio);
+                source.connect(analyser);
+                analyser.connect(audioContext.destination);
+                analyser.fftSize = 256;
+                const bufferLength = analyser.frequencyBinCount;
+                dataArray = new Uint8Array(bufferLength);
+            }
+
+            drawVisualizer();
+        }
+
+        function drawVisualizer() {
+            if (!vCtx || !visualizerCanvas) return;
+            if (!isAudioPlaying) {
+                vCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
+                requestAnimationFrame(drawVisualizer);
+                return;
+            }
+
+            requestAnimationFrame(drawVisualizer);
+            analyser.getByteFrequencyData(dataArray);
+
+            vCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
+            
+            const centerX = visualizerCanvas.width / 2;
+            const centerY = visualizerCanvas.height / 2;
+            const radius = Math.min(visualizerCanvas.width, visualizerCanvas.height) / 4;
+            
+            // Draw circular visualizer
+            vCtx.beginPath();
+            vCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+            vCtx.strokeStyle = 'rgba(0, 245, 255, 0.1)';
+            vCtx.lineWidth = 2;
+            vCtx.stroke();
+
+            for (let i = 0; i < dataArray.length; i++) {
+                const barHeight = dataArray[i] * 0.8;
+                const angle = (i * 2 * Math.PI) / dataArray.length;
+                
+                const x1 = centerX + Math.cos(angle) * radius;
+                const y1 = centerY + Math.sin(angle) * radius;
+                const x2 = centerX + Math.cos(angle) * (radius + barHeight);
+                const y2 = centerY + Math.sin(angle) * (radius + barHeight);
+
+                const r = 0;
+                const g = 245;
+                const b = 255;
+                
+                vCtx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${dataArray[i] / 255})`;
+                vCtx.lineWidth = 2;
+                vCtx.beginPath();
+                vCtx.moveTo(x1, y1);
+                vCtx.lineTo(x2, y2);
+                vCtx.stroke();
+            }
+
+            // Also draw some bars at the bottom for extra flair
+            const barWidth = (visualizerCanvas.width / dataArray.length) * 2.5;
+            let x = 0;
+            for (let i = 0; i < dataArray.length; i++) {
+                const barHeight = dataArray[i] / 2;
+                vCtx.fillStyle = `rgba(255, 0, 122, ${dataArray[i] / 512})`;
+                vCtx.fillRect(x, visualizerCanvas.height - barHeight, barWidth, barHeight);
+                x += barWidth + 1;
+            }
+        }
+
+        playPauseBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                if (audioContext && audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+                if (!audioContext) initVisualizer();
+                
+                audio.play();
+                isAudioPlaying = true;
+                playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            } else {
+                audio.pause();
+                isAudioPlaying = false;
+                playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            }
+        });
+
+        // Category Gallery Logic
+        const categoryModal = document.getElementById('categoryModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const categoryGrid = document.getElementById('categoryGrid');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const closeLightbox = document.getElementById('closeLightbox');
+        const filterTabs = document.querySelectorAll('.filter-tab');
+
+        let currentCategory = '';
+        let currentFilter = 'all';
+
+        const eventImages = {
+            'Shaadi': [
+                { url: "https://images.unsplash.com/photo-1519741497674-611481863552", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3", type: "night" },
+                { url: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1571266028243-3716f02d2d2e", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1505236858219-8359eb29e329", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1519225421980-715cb0215aed", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3", type: "night" },
+                { url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745", type: "night" },
+                { url: "https://images.unsplash.com/photo-1514525253361-bee8718a300a", type: "night" },
+                { url: "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec", type: "night" }
+            ],
+            'Birthday': [
+                { url: "https://images.unsplash.com/photo-1530103043960-ef38714abb15", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1513151233558-d860c5398176", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf", type: "night" },
+                { url: "https://images.unsplash.com/photo-1470337458703-46ad1756a187", type: "night" },
+                { url: "https://images.unsplash.com/photo-1516280440614-37939bbacd81", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce", type: "night" },
+                { url: "https://images.unsplash.com/photo-1496024840928-4c41702d51f7", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92", type: "night" },
+                { url: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3", type: "night" }
+            ],
+            'Sangeet': [
+                { url: "https://images.unsplash.com/photo-1583939003579-730e3918a45a", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3", type: "night" },
+                { url: "https://images.unsplash.com/photo-1566737236500-c8ac43014a67", type: "night" },
+                { url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92", type: "night" },
+                { url: "https://images.unsplash.com/photo-1514525253361-bee8718a300a", type: "night" },
+                { url: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745", type: "night" },
+                { url: "https://images.unsplash.com/photo-1505236858219-8359eb29e329", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1571266028243-3716f02d2d2e", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1519741497674-611481863552", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486", type: "outdoor" }
+            ],
+            'Reception': [
+                { url: "https://images.unsplash.com/photo-1519225421980-715cb0215aed", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1478144592103-25e218a04891", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1505236858219-8359eb29e329", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1519741497674-611481863552", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3", type: "night" },
+                { url: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3", type: "night" },
+                { url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1514525253361-bee8718a300a", type: "night" },
+                { url: "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec", type: "night" }
+            ],
+            'Corporate': [
+                { url: "https://images.unsplash.com/photo-1551836022-d5d88e9218df", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1511578314322-379afb476865", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1515187029135-18ee286d815b", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1523580494863-6f3031224c94", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4", type: "night" },
+                { url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1561489396-888724a1543d", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1551818255-e6e10975bc17", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1556761175-b413da4baf72", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1559223607-a43c990c692c", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1540575861501-7c91211c8896", type: "indoor" }
+            ],
+            'Garba Night': [
+                { url: "https://images.unsplash.com/photo-1506157786151-b8491531f063", type: "night" },
+                { url: "https://images.unsplash.com/photo-1497032205916-ac775f0649ae", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a", type: "night" },
+                { url: "https://images.unsplash.com/photo-1511578314322-379afb476865", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1515168833906-d2a3b82b1e2c", type: "night" },
+                { url: "https://images.unsplash.com/photo-1519741497674-611481863552", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d", type: "night" }
+            ],
+            'Pool Party': [
+                { url: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3", type: "night" },
+                { url: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf", type: "night" },
+                { url: "https://images.unsplash.com/photo-1566737236500-c8ac43014a67", type: "night" },
+                { url: "https://images.unsplash.com/photo-1530103043960-ef38714abb15", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1513151233558-d860c5398176", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1470337458703-46ad1756a187", type: "night" },
+                { url: "https://images.unsplash.com/photo-1516280440614-37939bbacd81", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce", type: "night" },
+                { url: "https://images.unsplash.com/photo-1496024840928-4c41702d51f7", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92", type: "night" },
+                { url: "https://images.unsplash.com/photo-1519741497674-611481863552", type: "indoor" }
+            ],
+            'College Fest': [
+                { url: "https://images.unsplash.com/photo-1459749411177-042180ce673c", type: "night" },
+                { url: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745", type: "night" },
+                { url: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4", type: "night" },
+                { url: "https://images.unsplash.com/photo-1514525253361-bee8718a300a", type: "night" },
+                { url: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3", type: "night" },
+                { url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1505236858219-8359eb29e329", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1571266028243-3716f02d2d2e", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1519741497674-611481863552", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486", type: "outdoor" },
+                { url: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3", type: "indoor" },
+                { url: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622", type: "indoor" }
+            ]
+        };
+
+        document.querySelectorAll('.pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                const category = pill.getAttribute('data-category');
+                handleCategoryClick(category);
+            });
+        });
+
+        function handleCategoryClick(category) {
+            currentCategory = category;
+            currentFilter = 'all';
+            updateFilterTabs();
+            
+            categoryModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            renderGallery();
+        }
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                currentFilter = tab.getAttribute('data-filter');
+                updateFilterTabs();
+                renderGallery();
+            });
+        });
+
+        function updateFilterTabs() {
+            filterTabs.forEach(t => {
+                t.classList.remove('active');
+                if (t.getAttribute('data-filter') === currentFilter) t.classList.add('active');
+            });
+        }
+
+        function renderGallery() {
+            const images = eventImages[currentCategory] || [];
+            const filteredImages = currentFilter === 'all' 
+                ? images 
+                : images.filter(img => img.type === currentFilter);
+
+            modalTitle.innerHTML = `<span>${currentCategory.toUpperCase()}</span> EVENTS <small style="font-size: 1rem; color: var(--muted); vertical-align: middle; margin-left: 10px;">(${filteredImages.length} EVENTS)</small>`;
+            
+            categoryGrid.innerHTML = '';
+            
+            if (filteredImages.length === 0) {
+                categoryGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--muted); padding: 40px;">No images found for this filter.</p>`;
+                return;
+            }
+
+            // Show skeleton loaders first
+            for (let i = 0; i < Math.min(filteredImages.length, 8); i++) {
+                const skeleton = document.createElement('div');
+                skeleton.className = 'category-img-wrapper skeleton';
+                categoryGrid.appendChild(skeleton);
+            }
+
+            setTimeout(() => {
+                categoryGrid.innerHTML = '';
+                filteredImages.forEach((imgData) => {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'category-img-wrapper reveal';
+                    
+                    const img = document.createElement('img');
+                    // Append optimization parameters to Unsplash URL
+                    img.src = imgData.url + "?auto=format&fit=crop&w=600&q=80";
+                    img.alt = currentCategory;
+                    img.loading = 'lazy';
+                    img.style.width = '100%';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                    img.style.opacity = '0';
+                    img.style.transition = 'opacity 0.5s ease';
+                    
+                    img.onload = () => {
+                        img.style.opacity = '1';
+                    };
+                    
+                    img.onerror = () => {
+                        img.src = 'https://via.placeholder.com/600x800?text=Image';
+                        img.style.opacity = '1';
+                    };
+                    
+                    img.onclick = () => {
+                        lightboxImg.src = img.src;
+                        lightbox.style.display = 'flex';
+                    };
+
+                    wrapper.appendChild(img);
+                    categoryGrid.appendChild(wrapper);
+                    
+                    // Trigger reveal animation
+                    setTimeout(() => wrapper.classList.add('active'), 50);
+                });
+            }, 300);
+        }
+
+        closeModal.onclick = () => {
+            categoryModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+
+        closeLightbox.onclick = () => {
+            lightbox.style.display = 'none';
+        };
+
+        lightbox.onclick = (e) => {
+            if(e.target === lightbox) lightbox.style.display = 'none';
+        };
     </script>
 </body>
 </html>
