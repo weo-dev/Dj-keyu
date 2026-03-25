@@ -1,13 +1,1600 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Keyur Dhodi – PRO SOUND | Gujarat's Premium DJ</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyur Dhodi – PRO SOUND | Turn Up The Night</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,600;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <style>
+        :root {
+            --neon: #00f5ff;
+            --pink: #ff007a;
+            --gold: #ffd700;
+            --bg: #050508;
+            --bg2: #09090f;
+            --card: #0f0f1e;
+            --text: #d0d0e8;
+            --muted: #707090;
+            --border: rgba(0, 245, 255, 0.2);
+            --glow: 0 0 20px rgba(0, 245, 255, 0.5), 0 0 60px rgba(0, 245, 255, 0.15);
+            --glow-pink: 0 0 20px rgba(255, 0, 122, 0.5), 0 0 60px rgba(255, 0, 122, 0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Barlow', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .bebas {
+            font-family: 'Bebas Neue', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.8rem);
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--text);
+            position: relative;
+            display: block;
+        }
+
+        .section-title span {
+            color: var(--neon);
+            text-shadow: var(--glow);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--neon);
+            box-shadow: var(--glow);
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
+            padding: 25px 0;
+            transition: var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+
+        nav.scrolled {
+            padding: 15px 0;
+            background: rgba(5, 5, 8, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            color: var(--neon);
+            text-shadow: var(--glow);
+            white-space: nowrap;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--text);
+            margin-left: 8px;
+            font-weight: normal;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-family: 'Barlow', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--neon);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon);
+            transition: var(--transition);
+            box-shadow: var(--glow);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .btn-nav {
+            background: var(--neon);
+            color: var(--bg);
+            padding: 10px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            box-shadow: var(--glow);
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.7);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 10001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: var(--neon);
+            margin: 6px 0;
+            transition: var(--transition);
+            box-shadow: var(--glow);
+        }
+
+        /* Hero */
+        #home {
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse 80% 60% at center, rgba(0, 245, 255, 0.15) 0%, transparent 70%);
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: clamp(52px, 10vw, 130px);
+            color: var(--neon);
+            text-shadow: var(--glow);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(24px, 4vw, 48px);
+            color: var(--pink);
+            text-shadow: var(--glow-pink);
+            letter-spacing: clamp(5px, 2vw, 15px);
+            margin-bottom: 20px;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            color: var(--muted);
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            min-height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        .btn-filled {
+            background: var(--neon);
+            color: var(--bg);
+            box-shadow: var(--glow);
+        }
+
+        .btn-filled:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 245, 255, 0.8);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--neon);
+            color: var(--neon);
+        }
+
+        .btn-outline:hover {
+            background: var(--neon);
+            color: var(--bg);
+            box-shadow: var(--glow);
+            transform: translateY(-3px);
+        }
+
+        /* Equalizer */
+        .equalizer {
+            position: absolute;
+            bottom: 40px;
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 60px;
+        }
+
+        .eq-bar {
+            width: 6px;
+            background: var(--neon);
+            box-shadow: var(--glow);
+            animation: eq 1s infinite ease-in-out;
+        }
+
+        .eq-bar:nth-child(2) { animation-delay: 0.2s; }
+        .eq-bar:nth-child(3) { animation-delay: 0.4s; }
+        .eq-bar:nth-child(4) { animation-delay: 0.1s; }
+        .eq-bar:nth-child(5) { animation-delay: 0.3s; }
+
+        @keyframes eq {
+            0%, 100% { height: 10px; }
+            50% { height: 50px; }
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 20px;
+            color: var(--neon);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* About */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--neon);
+            text-shadow: var(--glow);
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: var(--muted);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--neon);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+
+        .usp-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .usp-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .usp-item i {
+            color: var(--neon);
+            font-size: 1.3rem;
+            text-shadow: var(--glow);
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--neon);
+            margin-bottom: 25px;
+            text-shadow: var(--glow);
+        }
+
+        .service-card h4 {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .service-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon);
+            box-shadow: var(--glow);
+        }
+
+        /* Events */
+        .events-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pill {
+            background: var(--bg2);
+            border: 1px solid var(--neon);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            cursor: default;
+            transition: var(--transition);
+        }
+
+        .pill:hover {
+            background: var(--neon);
+            color: var(--bg);
+            box-shadow: var(--glow);
+            transform: scale(1.05);
+        }
+
+        /* How It Works */
+        .how-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .how-grid::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 15%;
+            width: 70%;
+            height: 2px;
+            border-top: 2px dashed var(--neon);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .how-item {
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-circle {
+            width: 80px;
+            height: 80px;
+            background: var(--bg);
+            border: 3px solid var(--neon);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--neon);
+            box-shadow: var(--glow);
+        }
+
+        .how-item i {
+            font-size: 2.5rem;
+            color: var(--pink);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .how-item h4 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .how-item p {
+            color: var(--muted);
+        }
+
+        /* Why Choose Us */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .why-card {
+            background: var(--bg2);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 4px solid var(--neon);
+            transition: var(--transition);
+        }
+
+        .why-card i {
+            font-size: 3rem;
+            color: var(--neon);
+            margin-bottom: 20px;
+            text-shadow: var(--glow);
+        }
+
+        .why-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .why-card:hover {
+            transform: translateY(-10px);
+            background: var(--card);
+            box-shadow: var(--glow);
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(45deg, var(--bg2), var(--card));
+            border: 1px solid var(--border);
+            overflow: hidden;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 245, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: white;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .gallery-label {
+            transform: translateY(0);
+        }
+
+        .gallery-item:hover {
+            border-color: var(--neon);
+            box-shadow: var(--glow);
+        }
+
+        /* Testimonials */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--card);
+            padding: 40px;
+            border-left: 5px solid var(--neon);
+            transition: var(--transition);
+        }
+
+        .stars {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-card h4 {
+            font-size: 1.2rem;
+            color: var(--neon);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--glow);
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+        }
+
+        .contact-form-wrapper {
+            background: var(--bg2);
+            padding: 50px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 15px;
+            color: white;
+            font-family: inherit;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--neon);
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+        }
+
+        textarea.form-control {
+            height: 120px;
+            resize: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--neon);
+            color: var(--bg);
+            border: none;
+            padding: 18px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 4px;
+            box-shadow: var(--glow);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 245, 255, 0.8);
+        }
+
+        .success-card {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .success-card i {
+            font-size: 4rem;
+            color: var(--neon);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .success-card h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--card);
+            border: 1px solid var(--neon);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon);
+            font-size: 1.2rem;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: var(--glow);
+        }
+
+        .info-text h5 {
+            font-size: 1.1rem;
+            color: var(--neon);
+            margin-bottom: 5px;
+        }
+
+        .info-text p, .info-text a {
+            color: var(--text);
+            font-size: 1.05rem;
+        }
+
+        .btn-whatsapp-large {
+            background: #25D366;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 18px;
+            border-radius: 4px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp-large:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            color: var(--neon);
+            border-color: var(--neon);
+            box-shadow: var(--glow);
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 40px;
+            background: var(--bg2);
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            color: var(--neon);
+            text-shadow: var(--glow);
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .footer-tagline {
+            color: var(--muted);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a:hover {
+            color: var(--neon);
+        }
+
+        .footer-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--border);
+            margin-bottom: 30px;
+        }
+
+        .copyright {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .crafted {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            z-index: 9999;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1199px) {
+            .about-grid, .contact-grid { gap: 40px; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 767px) {
+            .hamburger { display: block; }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: var(--bg);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.5s ease;
+                padding: 50px;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+            .hero-btns { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
+            .btn-hero { width: 100%; }
+
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .about-grid, .contact-grid, .services-grid, .how-grid, .why-grid, .gallery-grid, .testimonial-grid { 
+                grid-template-columns: 1fr; 
+            }
+
+            .how-grid::before { display: none; }
+            .form-row { grid-template-columns: 1fr; }
+            .contact-info { order: -1; }
+            
+            .contact-form-wrapper { padding: 30px 20px; }
+            
+            section { padding: 60px 0; }
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Particle Canvas Fix */
+        #hero-canvas {
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="container">
+            <a href="#home" class="logo bebas">KEYUR DHODI <span>| PRO SOUND</span></a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#events" class="nav-link">Events</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#contact" class="btn-nav">BOOK NOW</a></li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title reveal">KEYUR DHODI</h1>
+            <h2 class="hero-subtitle reveal">PRO SOUND</h2>
+            <p class="hero-tagline reveal">"Turn Up The Night. Feel Every Beat."</p>
+            <div class="hero-btns reveal">
+                <a href="#contact" class="btn-hero btn-filled">BOOK NOW</a>
+                <a href="#services" class="btn-hero btn-outline">OUR SERVICES</a>
+            </div>
+        </div>
+
+        <div class="equalizer">
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+        </div>
+
+        <a href="#about" class="scroll-down">
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="container">
+            <div class="stats-row reveal">
+                <div class="stat-card">
+                    <h3 class="counter" data-target="500">0</h3>
+                    <p>Events</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="counter" data-target="10">0</h3>
+                    <p>Years</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="counter" data-target="50">0</h3>
+                    <p>Cities</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="counter" data-target="100">0</h3>
+                    <p>Satisfaction %</p>
+                </div>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <h2 class="bebas">Gujarat's Premium DJ Service</h2>
+                    <p>Keyur Dhodi – PRO SOUND is a name synonymous with high-energy performances and professional audio engineering. Based in Gujarat, we specialize in creating immersive musical journeys for weddings, corporate galas, and private celebrations.</p>
+                    <p>With over a decade of experience, we don't just play music; we curate experiences. Our state-of-the-art sound systems and dynamic lighting setups are designed to make every guest feel the rhythm in their soul.</p>
+                </div>
+                <div class="about-usp reveal">
+                    <div class="usp-list">
+                        <div class="usp-item"><i class="fa-solid fa-circle-check"></i> High-End Audio Engineering</div>
+                        <div class="usp-item"><i class="fa-solid fa-circle-check"></i> Dynamic Lighting & Visuals</div>
+                        <div class="usp-item"><i class="fa-solid fa-circle-check"></i> Professional Event Management</div>
+                        <div class="usp-item"><i class="fa-solid fa-circle-check"></i> Custom Playlists & Genres</div>
+                        <div class="usp-item"><i class="fa-solid fa-circle-check"></i> On-Time Setup & Execution</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" style="background: var(--bg2);">
+        <div class="container">
+            <h2 class="section-title reveal">OUR <span>SERVICES</span></h2>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <i class="fa-solid fa-music"></i>
+                    <h4>Wedding DJ & Sound</h4>
+                    <p>Making your big day more magical with premium sound and a playlist that keeps the family on the floor.</p>
+                </div>
+                <div class="service-card reveal">
+                    <i class="fa-solid fa-cake-candles"></i>
+                    <h4>Birthday Party</h4>
+                    <p>From kids to adults, we bring the energy that turns a simple birthday into a legendary celebration.</p>
+                </div>
+                <div class="service-card reveal">
+                    <i class="fa-solid fa-person-rays"></i>
+                    <h4>Sangeet Night</h4>
+                    <p>The heart of Indian weddings. We provide perfect sync for performances and high-octane dance sets.</p>
+                </div>
+                <div class="service-card reveal">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <h4>Corporate Events</h4>
+                    <p>Professional sound solutions for seminars, product launches, and corporate annual parties.</p>
+                </div>
+                <div class="service-card reveal">
+                    <i class="fa-solid fa-compact-disc"></i>
+                    <h4>Club & Night Events</h4>
+                    <p>Deep bass and crisp highs for club nights, ensuring a non-stop party atmosphere.</p>
+                </div>
+                <div class="service-card reveal">
+                    <i class="fa-solid fa-volume-high"></i>
+                    <h4>Sound System on Rent</h4>
+                    <p>Top-tier professional audio equipment available for rent for events of any scale.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events -->
+    <section id="events">
+        <div class="container">
+            <h2 class="section-title reveal">EVENTS WE <span>COVER</span></h2>
+            <div class="events-pills reveal">
+                <div class="pill">Shaadi</div>
+                <div class="pill">Birthday</div>
+                <div class="pill">Sangeet</div>
+                <div class="pill">Reception</div>
+                <div class="pill">Corporate</div>
+                <div class="pill">Garba Night</div>
+                <div class="pill">Pool Party</div>
+                <div class="pill">College Fest</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" style="background: var(--bg2);">
+        <div class="container">
+            <h2 class="section-title reveal">HOW IT <span>WORKS</span></h2>
+            <div class="how-grid reveal">
+                <div class="how-item">
+                    <div class="step-circle">01</div>
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <h4>Contact Us</h4>
+                    <p>Reach out via form or WhatsApp with your event details.</p>
+                </div>
+                <div class="how-item">
+                    <div class="step-circle">02</div>
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <h4>Book Your Date</h4>
+                    <p>Confirm your booking with a small token amount to lock the slot.</p>
+                </div>
+                <div class="how-item">
+                    <div class="step-circle">03</div>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <h4>We Deliver Magic</h4>
+                    <p>We arrive early, set up, and turn up the night for your guests.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="why">
+        <div class="container">
+            <div class="why-grid">
+                <div class="why-card reveal">
+                    <i class="fa-solid fa-sliders"></i>
+                    <h4>Professional Equipment</h4>
+                    <p>Using only industry-standard gear for the best clarity.</p>
+                </div>
+                <div class="why-card reveal">
+                    <i class="fa-solid fa-clock"></i>
+                    <h4>On-Time Every Time</h4>
+                    <p>Punctuality is our priority. We are ready before you are.</p>
+                </div>
+                <div class="why-card reveal">
+                    <i class="fa-solid fa-headphones"></i>
+                    <h4>Premium Sound Quality</h4>
+                    <p>Crystal clear audio that doesn't hurt the ears, just moves the feet.</p>
+                </div>
+                <div class="why-card reveal">
+                    <i class="fa-solid fa-face-smile"></i>
+                    <h4>500+ Happy Clients</h4>
+                    <p>A track record of successful events across Gujarat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" style="background: var(--bg2);">
+        <div class="container">
+            <h2 class="section-title reveal">OUR <span>WORK</span></h2>
+            <div class="gallery-grid">
+                <div class="gallery-item reveal">
+                    <img src="https://picsum.photos/seed/dj1/600/400" alt="Wedding" class="gallery-img" referrerPolicy="no-referrer">
+                    <div class="gallery-overlay"><span class="gallery-label">Wedding 2024</span></div>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://picsum.photos/seed/dj2/600/400" alt="Birthday" class="gallery-img" referrerPolicy="no-referrer">
+                    <div class="gallery-overlay"><span class="gallery-label">Birthday Party</span></div>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://picsum.photos/seed/dj3/600/400" alt="Sangeet" class="gallery-img" referrerPolicy="no-referrer">
+                    <div class="gallery-overlay"><span class="gallery-label">Sangeet Night</span></div>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://picsum.photos/seed/dj4/600/400" alt="Corporate" class="gallery-img" referrerPolicy="no-referrer">
+                    <div class="gallery-overlay"><span class="gallery-label">Corporate Event</span></div>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://picsum.photos/seed/dj5/600/400" alt="Club" class="gallery-img" referrerPolicy="no-referrer">
+                    <div class="gallery-overlay"><span class="gallery-label">Club Night</span></div>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://picsum.photos/seed/dj6/600/400" alt="Reception" class="gallery-img" referrerPolicy="no-referrer">
+                    <div class="gallery-overlay"><span class="gallery-label">Reception</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title reveal">WHAT <span>CLIENTS SAY</span></h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card reveal">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>"Keyur made our wedding reception absolutely unforgettable. The sound quality was amazing and he knew exactly what to play to keep everyone dancing!"</p>
+                    <h4>Rahul Shah</h4>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>"Best DJ service in Gujarat! Professional, on-time, and very high-quality equipment. Highly recommended for corporate events."</p>
+                    <h4>Priya Patel</h4>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p>"The energy Keyur brings to the floor is unmatched. Our Sangeet night was a huge hit thanks to PRO SOUND!"</p>
+                    <h4>Mohit Verma</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="background: var(--bg2);">
+        <div class="container">
+            <h2 class="section-title reveal">GET IN <span>TOUCH</span></h2>
+            <div class="contact-grid">
+                <div class="contact-form-wrapper reveal">
+                    <form id="bookingForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control" placeholder="+91 XXXXX XXXXX" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="date">Event Date</label>
+                                <input type="date" id="date" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="type">Event Type</label>
+                                <select id="type" class="form-control" required>
+                                    <option value="">Select Type</option>
+                                    <option value="Wedding">Wedding</option>
+                                    <option value="Birthday">Birthday</option>
+                                    <option value="Sangeet">Sangeet</option>
+                                    <option value="Corporate">Corporate</option>
+                                    <option value="Club Event">Club Event</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" class="form-control" placeholder="Event Location" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" placeholder="Tell us more about your event..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">SEND BOOKING REQUEST</button>
+                    </form>
+
+                    <div id="successMsg" class="success-card">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <h3>Booking request sent!</h3>
+                        <p>We'll call you within 24 hours to discuss the details.</p>
+                    </div>
+                </div>
+
+                <div class="contact-info reveal">
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div class="info-text">
+                            <h5>Call Us</h5>
+                            <p><a href="tel:+916354488594">+91 63544 88594</a></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                        <div class="info-text">
+                            <h5>WhatsApp</h5>
+                            <p><a href="https://wa.me/916354488594" target="_blank">+91 63544 88594</a></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="info-text">
+                            <h5>Location</h5>
+                            <p>Gujarat, India</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
+                        <div class="info-text">
+                            <h5>Working Hours</h5>
+                            <p>Mon–Sun, 9AM–9PM</p>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/916354488594" target="_blank" class="btn-whatsapp-large">
+                        <i class="fa-brands fa-whatsapp"></i> CHAT ON WHATSAPP
+                    </a>
+
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="#home" class="footer-logo bebas">KEYUR DHODI | PRO SOUND</a>
+            <p class="footer-tagline">"Turn Up The Night. Feel Every Beat."</p>
+            
+            <div class="footer-nav">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#events">Events</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <p class="copyright">&copy; 2025 Keyur Dhodi PRO SOUND. All Rights Reserved.</p>
+            <p class="crafted">Crafted with ❤️ for music lovers</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/916354488594" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-link, .btn-nav').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Active Link Highlighting
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href').includes(current)) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth Scroll for all buttons
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for Reveal Animations
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Trigger counter if it's a counter element
+                    if (entry.target.classList.contains('stats-row')) {
+                        startCounters();
+                    }
+                }
+            });
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, {
+            threshold: 0.15
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Counter Animation
+        function startCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / 100;
+
+                if (count < target) {
+                    const updateCount = () => {
+                        const current = +counter.innerText;
+                        if (current < target) {
+                            counter.innerText = Math.ceil(current + increment);
+                            setTimeout(updateCount, 20);
+                        } else {
+                            counter.innerText = target + (target === 100 ? '%' : '+');
+                        }
+                    };
+                    updateCount();
+                }
+            });
+        }
+
+        // Form Submission
+        const bookingForm = document.getElementById('bookingForm');
+        const successMsg = document.getElementById('successMsg');
+
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Basic validation check (handled by HTML5 required, but double check)
+            if (bookingForm.checkValidity()) {
+                bookingForm.style.display = 'none';
+                successMsg.style.display = 'block';
+            }
+        });
+
+        // Canvas Particles
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = Math.random() > 0.5 ? '#00f5ff' : '#ff007a';
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            particles = [];
+            const count = Math.floor((canvas.width * canvas.height) / 10000);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', () => {
+            initCanvas();
+            createParticles();
+        });
+
+        initCanvas();
+        createParticles();
+        animateParticles();
+
+    </script>
+</body>
+</html>
